@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'collab/content/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'collab/content/site.css' %}" />
+    <script src="{% static 'collab/scripts/modernizr-2.6.2.js' %}"></script>
+    <!-- Bootstrap Core CSS -->
+
+    <!-- Custom CSS -->
+    <link href="{% static 'collab/content/simple-sidebar.css' %}" rel="stylesheet">
+    <script src="{% static 'collab/scripts/modernizr-2.6.2.js' %}"></script>
+</head>
+
+<body style="background-image: url('/static/collab/img/muk.jpg'); background-size: 100% auto; background-repeat: no-repeat; max-width: 100%;">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="{% url 'index' %}" class="navbar-brand">BACK-BOOST CONVERTER LAB</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+                {% include 'accounts/loginpartial.html' %}
+            </div>
+        </div>
+    </div>
+
+    {% if form.errors %}
+        <p class="validation-summary-errors">Please enter a correct user name and password.</p>
+    {% endif %}
+
+    <div class="container body-content">
+
+<div class="row">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-4">
+        <section id="loginForm">
+            <form method="post" class="form-horizontal">
+                {% csrf_token %}
+                <h4>Use a local account to log in.</h4>
+                <hr />
+                <div class="form-group">
+                    <label for="id_username" class="col-md-2 control-label">Std Number</label>
+
+                    <div class="col-md-10">
+                        {{ form.std_id }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_password" class="col-md-2 control-label">Password</label>
+
+                    <div class="col-md-10">
+                        {{ form.password }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="hidden" name="next" value="/" />
+                        <input type="submit" value="Log in" class="btn btn-default" />
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>
+
+        <hr/>
+        <footer>
+            <p>&copy; {{ year }} - BBCL</p>
+        </footer>
+    </div>
+
+    <!-- jQuery -->
+    <script src="{% static 'collab/scripts/jquery.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'collab/scripts/bootstrap.min.js' %}"></script>
+
+    <!-- Menu Toggle Script -->
+    <script src="{% static 'collab/scripts/respond.js' %}"></script>
+{% block scripts %}
+{% endblock %}
+
+</body>
+</html>

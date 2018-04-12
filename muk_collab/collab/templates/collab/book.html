@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <hr>
+
+    <br>
+    <br>
+
+    <div class="row">
+
+        <span style="color: darkgreen"><strong>Enter Date</strong></span>
+        <br>
+        <form method="get" name="search">
+            <div class="row">
+                <div class="col-md-2">
+                    <input type="date" id="search" name="q" required placeholder="Date" class="form-control" style="width: 155px" />
+                </div>
+                <div class="col-md-2">
+                </div>
+
+                 <div class="col-md-1">
+                <input type="submit" value="Filter booked time" class="btn btn-success btn-sm"/>
+
+                </div>
+
+                 <div class="col-md-7">
+
+                </div>
+            </div>
+
+        </form>
+        <br>
+    <ul id="search-results">
+                    {% for booking in booked_times %}
+                        {% if booking.start_time == '6 p.m.' %}
+                            <button class="btn btn-success btn-sm">6:00 PM and 7:00 PM</button>
+                        {% else %}
+                        <button class="btn btn-warning btn-sm">6:00 PM and 7:00 PM</button>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+    <br>
+
+    </div>
+
+    <hr>
+
+    <div class="row">
+
+        {% if messages %}
+            {% for message in messages %}
+                <span style="color: #2a6496" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+            {% endfor %}
+        {% endif %}
+
+    <div class="col-md-3">
+
+    </div>
+
+    <div class="col-md-6">
+        <h4 style="color: darkgreen">New Project</h4>
+        <form method="POST" class="form-horizontal" role="form">
+            {% csrf_token %}
+            {{ form.errors }}
+            <div class="form-group">
+                <label for="date" class="col-sm-2 control-label">Date</label>
+                <div class="col-sm-10">
+                    <input type="date" name="date" required placeholder="Date" value="{{ my_date.month }}/{{ my_date.day }}/{{ my_date.year }}" class="form-control" id="id_date" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="start_time" class="col-sm-2 control-label">Start time</label>
+                <div class="col-sm-10">
+                    <input type="time" name="start_time" step="3600" required placeholder="Start Time" class="form-control" id="id_start_time" />
+                </div>
+            </div>
+             <div class="form-group">
+                <label for="end_time" class="col-sm-2 control-label">End time</label>
+                <div class="col-sm-10">
+                    <input type="time" name="end_time" step="3600" required placeholder="End Time" class="form-control" id="id_end_time" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary" name="booking">Submit</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="col-md-3">
+
+    </div>
+
+    </div>
+
+{% endblock %}

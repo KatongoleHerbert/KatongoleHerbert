@@ -1,0 +1,13 @@
+{% if user.is_authenticated %}
+    <ul class="nav navbar-nav navbar-right">
+        <li><span class="navbar-brand">Hello {{ user.get_full_name }}!</span></li>
+        <li><a href="{% url 'user_logout' %}">Sign Out</a></li>
+    </ul>
+
+{% else %}
+
+<ul class="nav navbar-nav navbar-right">
+    <li><a href="{% url 'app_login' %}">Log in</a></li>
+</ul>
+
+{% endif %}
